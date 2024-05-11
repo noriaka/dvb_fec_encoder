@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def array_to_poly(array_val: list) -> list:
     """
     将数组转成多项式
@@ -101,15 +104,59 @@ def get_gx_by_t(gx_arr: list, t: int) -> list:
     根据纠错位数返回不同的生成多项式gx
     :param gx_arr: 生成多项式数组
     :param t: 纠错位数
-    :return: 生成多项式
+    :return: 生成多项式 g_r-1, ..., g_0
     """
     poly_list = array_to_poly(gx_arr)
     poly_temp = [0]
     for i in range(t):
         poly_temp = multi_poly(poly_temp, poly_list[i])
-    poly_temp.reverse()
-    gx = poly_temp[:-1]
+    gx = poly_temp[1:]
     return gx
+
+
+def dot_ndarray(arr_a: np.ndarray, arr_b: np.ndarray):
+    """
+    按二进制规则计算两个ndarray的点乘
+    :param arr_a: ndarray A
+    :param arr_b: ndarray B
+    :return: 点乘结果
+    """
+    arr_c = []
+    cnt = len(arr_a)
+    for i in range(cnt):
+        arr_c.append(arr_a[i] * arr_b[i])
+    res = 0
+    for val in arr_c:
+        res = res ^ val
+    return res
+
+
+def multi_matrix(matrix_a: np.ndarray, matrix_b: np.ndarray):
+    """
+    计算两个矩阵相乘
+    :param matrix_a: 矩阵A
+    :param matrix_b: 矩阵B
+    :return: 相乘结果
+    """
+    r = matrix_a.shape[0]
+    matrix_c = np.zeros((r, r)).astype(int)
+    for i in range(r):
+        for j in range(r):
+            matrix_c[i][j] = dot_ndarray(matrix_a[i], matrix_b[:, j])
+    return matrix_c
+
+
+def get_gx_matrix(gx_arr, n):
+    r = len(gx_arr)
+    gx_matrix = np.zeros((r, r)).astype(int)
+    for i in range(r):
+        gx_matrix[i, 0] = gx_arr[i]
+        if i + 1 < r:
+            gx_matrix[i, i + 1] = 1
+    gx_res_matrix = gx_matrix
+    for i in range(n - 1):
+        gx_res_matrix = multi_matrix(gx_res_matrix, gx_matrix)
+    return gx_res_matrix
 
 
 if __name__ == '__main__':
@@ -129,5 +176,19 @@ if __name__ == '__main__':
     ]
     t = 8
     gx = get_gx_by_t(init_gx, t)
-    for i in gx:
-        print(i, end='')
+    # for i in gx:
+    #     print(i, end='')
+    r = 4
+    g = [1, 0, 0, 1]
+    matrix = np.zeros((r, r)).astype(int)
+
+    for i in range(r):
+        matrix[i, 0] = g[i]
+        if i + 1 < r:
+            matrix[i, i + 1] = 1
+    matrix.astype(int)
+    print(matrix[0])
+    print(matrix[3])
+    print(dot_ndarray(matrix[0], matrix[3]))
+    print(matrix.shape[0])
+    print(get_gx_matrix(gx, 2))
