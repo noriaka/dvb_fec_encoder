@@ -76,8 +76,104 @@ for r in range(0, n-k):
 
 for c in (0, k-1):
    # 遍历H中第c列值为1的行数
-   for r in range(0, n-k):
+   for r in CN(c):
       s[r] = s[r] + i[c]
 ```
 
+3. 考虑到代码的循环性，使用L度并行来提高吞吐量，于是设：
+$$\begin{equation*} \textbf {i}_{m}=\left [{i_{360m},~i_{360m+1},~i_{360m+2},~\ldots i_{360m+359}}\right] \tag{17}\end{equation*}$$
+其中$m\varepsilon\{0,1,...,t-1\}$，则公式(10)变为：
+$$\begin{equation*} {\textbf {S}\prime }_{1\times (N-K)}=\,\,\left [{\textbf {S}_{0},~\textbf {S}_{1},~\ldots,~\textbf {S}_{q-1}}\right] \tag{18}\end{equation*}$$
+其中$S_j$为一个360 bit的向量，$j\varepsilon\{0,1,...,q-1\}$：
+$$\begin{equation*} \textbf {S}_{j}=[s_{j},s_{j+q},s_{j+2q,}\ldots s_{j+359q}] \tag{19}\end{equation*}$$
+此时设$\textbf{S}_M$为：
+$$\begin{align*} \textbf {S}_{M}=\left [{\begin{matrix}\textbf {S}_{0}\\ \textbf {S}_{1}\\ \vdots \\ \textbf {S}_{q-1}\\ \end{matrix}}\right]=\left [{\begin{matrix}s_{0}&s_{q}&\cdots &s_{359q}\\ s _{1}&s_{1+q}&\cdots &s_{359q+1}\\ \vdots &\vdots &\ddots &\vdots \\ s _{q-1}&s_{2q-1}&\cdots &s_{360q-1}\\ \end{matrix}}\right] \tag{20}\end{align*}$$
+
+4. 计算时我们需要通过$CN(c)$来得到$CN(c+j)$，这里的$j\varepsilon\{1,2,...,L-1\}$。当$CN_r$连接到$IN_c$时，有$r\varepsilon CN(c)$，则$|r+j \cdot q|_{n-k}\varepsilon CN(c+j)$。同时因为$L=360$，所以需同时计算360个值即$[s_r,s_{|r+q|_{n-k}},s_{|r+2q|_{n-k}},...,s_{|r+359q|_{n-k}}]$，然而其中$r\varepsilon \{0,1,...,n-k-1\}$，因此计算出的向量并不能和$\textbf{S}_M$中的行向量对应。要将它们进行对应则要找到$s_r$在$\textbf{S}_M$中的位置，然后将输入的$\textbf{i}_m$进行适当的循环右移来计算得到，具体算法如下：
+
+```python
+# q = (n-k)/L, t = k/L, L=360
+for r in range(0, n-k):
+   s[r] = 0
+
+for m in range(0, t):
+   # 获取每个分组中第一列值为1的索引r
+   for r in CN(c=360*m):
+      # 计算分组中所有列
+      s[r] = s[r] + i[360*m]
+      s[(r+q)%(n-k)] = s[(r+q)%(n-k)] + i[360*m+1]
+      s[(r+2*q)%(n-k)] = s[(r+2*q)%(n-k)] + i[360*m+2]
+      ...
+      s[(r+359*q)%(n-k)] = s[(r+359*q)%(n-k)] + i[360*m+359]
+
+# 初始化SM矩阵
+SM = np.zeros((q, L), dtype=int)
+for m in range(0, t):
+   for r in CN(c=360*m):
+      # 找到sr在矩阵中的位置(j, x)
+      j = r % q
+      x = r // q
+      # 将输入数据i进行循环右移x位后与矩阵的第j行相加
+      SM[j] = SM[j] + (i[-x:] + i[:-x])
+```
+
+5. 校验位计算：首先设$\textbf{S}_C$为：
+$$\begin{align*} \textbf {S}_{C}=\left [{\begin{matrix}\sum _{i=0}^{q-1}s_{i}&\sum _{i=q}^{2q-1}s_{i}&\sum _{i=2q}^{3q-1}s_{i}&\cdots &\sum _{i=359q}^{360q-1}s_{i}\\ \end{matrix}}\right] \tag{21}\end{align*}$$
+由于$\textbf{S}_C$是对矩阵$\textbf{S}_M$每列的累加和即对$S_j$的累加，因此计算时不需考虑第$j$行，同时需注意两者的运算可以并行执行,算法如下：
+
+```python
+# 初始化SC向量
+for i in range(0, 360):
+   SC[i] = 0
+
+for m in range(0, t):
+   for r in CN(c=360*m):
+      # 计算偏移位数x
+      x = r // q
+      SC = SC + (i[-x:] + i[:-x])
+```
+
+接着设矩阵$\textbf{L}_{L\times L}$为下三角矩阵并进行运算：
+$$\begin{align*} \textbf {L}=\left [{\begin{matrix}1&\quad 0&\quad 0&\quad \ldots &\quad 0&\quad 0\\ 1&\quad 1&\quad 0&\quad \ldots &\quad 0&\quad 0\\ 1&\quad 1&\quad 1&\quad \ldots &\quad 0&\quad 0\\ \vdots &\quad \vdots &\quad \vdots &\quad \ddots &\quad \vdots &\quad \vdots \\ 1&\quad 1&\quad 1&\quad \ldots &\quad 1&\quad 0\\ 1&\quad 1&\quad 1&\quad \ldots &\quad 1&\quad 1\\ \end{matrix}}\right]_{L\times L} \tag{22}\end{align*}$$
+
+$$\begin{align*} \begin{matrix} &\hspace {-12pc}\textbf {L}\cdot \textbf {S}_{C}^{T} \\ &=\left [{\begin{matrix}\sum _{i=0}^{q-1}s_{i}&\sum _{i=0}^{2q-1}s_{i}&\sum _{i=0}^{3q-1}s_{i}&\cdots &\sum _{i=0}^{360q-1}s_{i}\\ \end{matrix}}\right]^{T}~\end{matrix} \tag{23}\end{align*}$$
+
+然后可将结果转置后逻辑右移得到校验向量的初始状态：
+$$\begin{align*} \textbf {P}_{init}&=\left [{\begin{matrix}0&\sum _{i=0}^{q-1}s_{i}&\sum _{i=0}^{2q-1}s_{i}&\cdots & \sum _{i=0}^{359q-1}s_{i}\\ \end{matrix}}\right] \\ &=\left [{\begin{matrix}0&p_{q-1}&p_{2q-1}&\cdots &p_{359q-1}\\ \end{matrix}}\right]\tag{24}\end{align*}$$
+
+最后根据公式(14)可以得到：
+$$\begin{align*} \begin{cases} \displaystyle \begin{matrix}[p_{0} p_{q} \cdots p_{359q}]= \\ =[0 p_{(q-1)} \cdots p_{(359q-1)}]+[s_{0} s_{q} \cdots s_{359q}]\end{matrix} \\ \displaystyle \begin{matrix}[p_{1} p_{(q+1)} \cdots p_{(359q+1)}]= \\ =[p_{0} p_{q} \cdots p_{359q}]+[s_{1} s_{(1+q)} \cdots s_{(1+359q)}]\end{matrix}\\ \displaystyle \begin{matrix}[p_{2} p_{(q+2)} \cdots p_{(359q+2)}]= \\ =[p_{1} p_{(q+1)} \cdots p_{(359q+1)}]+[s_{2} s_{(2+q)} \cdots s_{(2+359q)}]\end{matrix} \\ \displaystyle \vdots \\ \displaystyle \begin{matrix}[p_{(q-1)} p_{(2q-1)} \cdots p_{(n-k-1)}]= \\ =[p_{(q-2)} p_{(2q-2)} \cdots p_{(n-k-2)}]+ [s_{(q-1)} s_{(2q-1)} \cdots s_{(n-k-1)}]\end{matrix} \end{cases} \\{}\tag{25}\end{align*}$$
+
+设$\textbf{P}_j$为：
+$$\begin{align*} \textbf {P}_{j}=\left [{\begin{matrix}p_{j}&p_{j+q}&p_{j+2q}&\cdots &p_{j+359q}\\ \end{matrix}}\right] \tag{26}\end{align*}$$
+则上述运算可简化为：
+$$\begin{align*} \begin{cases} \displaystyle P_{0}=\textbf{P}_{init}=[0 p_{q-1} p_{2q-1} \cdots p_{359q-1}]\\ \displaystyle P_{j}=S_{j}+P_{j-1} \end{cases} \tag{27}\end{align*}$$
+同样设矩阵$\textbf{P}_M$为：
+$$\begin{align*} \textbf {P}_{M}&= \\ \left [{\begin{matrix}\textbf {P}_{0}\\ \textbf {P}_{1}\\ \textbf {P}_{2}\\ \vdots \\ \textbf {P}_{q-1}\\ \end{matrix}}\right]&=\left [{~\begin{matrix}p_{0}&p_{q}&p_{2q}&\ldots &p_{359q}\\ p _{1}&p_{q+1}&p_{2q+1}&\ldots &p_{359q+1}\\ p _{2}&p_{q+2}&p_{2q+2}&\ldots &p_{359q+2}\\ \vdots &\vdots &\vdots &\ddots &\vdots \\ p _{q-1}&p_{2q-1}&p_{3q-1}&\ldots &p_{N-K-1}\\ \end{matrix}}\right]_{q \times L} \tag{28}\end{align*}$$
+其中$P_j$的计算算法如下：
+
+```python
+PM[0] = P_init
+for j in (1, q):
+   PM[j] = SM[j] + PM[j-1]
+```
+
+6. 以上计算存在两个问题：
+   + 校验位初始向量$\textbf{P}_{init}$需要通过$\textbf{S}_C$得到，而$\textbf{S}_C$又需要等所有的$S_j$计算完成才能计算出
+   + 每次并行计算得到的$L=360$个校验位未按正常顺序输出，需要增加一个排序操作
+
+---
+
+#### IV. Vectorized Quasi-Cyclic Encoding
+
+```python
+[0 0 0 0 0 0]
+[1 0 1 1 0 1]
+[0 0 0 0 0 0]
+[1 1 0 1 1 0]
+[0 0 0 0 0 0]
+[0 1 1 0 1 1]
+```
+1. 发现dvb模块从bram中读出的数据不对，现在单独写仿真测试dvb模块从bram中读取数据（之前是从文件读取）
+2. 并行化LDPC编码器论文阅读，进行部分编码实现
 ---
