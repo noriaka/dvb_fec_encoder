@@ -1,0 +1,66 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Wed Nov  1 19:30:12 2023
+# Process ID: 18284
+# Current directory: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9688 E:\MLK_hardware\F9\100T\3_1_02\01_axi4-uifdma_ip\uifdma\project_1.xpr
+# Log file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/vivado.log
+# Journal file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/project_1.xpr
+update_compile_order -fileset sources_1
+ipx::package_project -root_dir e:/mlk_hardware/f9/100t/3_1_02/01_axi4-uifdma_ip/uifdma -vendor xilinx.com -library user -taxonomy /UserIP -force
+set_property display_name uiFDMA_v3_0 [ipx::current_core]
+set_property description uiFDMA_v3_0 [ipx::current_core]
+set_property display_name uiFDMA_v3_2 [ipx::current_core]
+set_property description uiFDMA_v3_2 [ipx::current_core]
+set_property version 3.2 [ipx::current_core]
+ipx::remove_bus_interface I [ipx::current_core]
+ipx::remove_bus_interface O [ipx::current_core]
+ipx::create_abstraction_definition xilinx.com user FDMA_rtl 3.2
+ipx::create_bus_definition xilinx.com user FDMA 3.2
+set_property xml_file_name E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA_rtl.xml [ipx::current_busabs]
+set_property xml_file_name E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA.xml [ipx::current_busdef]
+set_property bus_type_vlnv xilinx.com:user:FDMA:3.2 [ipx::current_busabs]
+ipx::save_abstraction_definition [ipx::current_busabs]
+ipx::save_bus_definition [ipx::current_busdef]
+ipx::add_bus_abstraction_port I_fdma_waddr [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wareq [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_wbusy [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wsize [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_wvalid [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wdata [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wready [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_raddr [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_rareq [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_rsize [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_rbusy [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_rdata [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_rvalid [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_rready [ipx::current_busabs]
+ipx::save_bus_definition [ipx::current_busdef]
+ipx::save_abstraction_definition [ipx::current_busabs]
+update_ip_catalog -rebuild
+update_ip_catalog -rebuild -repo_path e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+ipx::infer_bus_interface {I_fdma_waddr I_fdma_wareq O_fdma_wbusy I_fdma_wsize O_fdma_wvalid I_fdma_wdata I_fdma_wready I_fdma_raddr I_fdma_rareq I_fdma_rsize O_fdma_rbusy O_fdma_rdata O_fdma_rvalid I_fdma_rready} xilinx.com:user:FDMA:3.2 [ipx::current_core]
+set_property name FDMA_S [ipx::get_bus_interfaces FDMA_1 -of_objects [ipx::current_core]]
+ipx::unload_abstraction_definition e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA_rtl.xml
+ipx::unload_bus_definition e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA.xml
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::save_core [ipx::current_core]
+set_property core_revision 2 [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::check_integrity [ipx::current_core]
+ipx::save_core [ipx::current_core]
+update_ip_catalog -rebuild -repo_path e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma

@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Thu Feb  1 16:45:43 2024
+# Process ID: 14044
+# Current directory: F:/work/03_H/H3-CZ08_7035/3_1_02_ex_plddr_axi_fdma/01_axi4-uifdma_ip/uifdma
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent1508 F:\work\03_H\H3-CZ08_7035\3_1_02_ex_plddr_axi_fdma\01_axi4-uifdma_ip\uifdma\project_1.xpr
+# Log file: F:/work/03_H/H3-CZ08_7035/3_1_02_ex_plddr_axi_fdma/01_axi4-uifdma_ip/uifdma/vivado.log
+# Journal file: F:/work/03_H/H3-CZ08_7035/3_1_02_ex_plddr_axi_fdma/01_axi4-uifdma_ip/uifdma\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project F:/work/03_H/H3-CZ08_7035/3_1_02_ex_plddr_axi_fdma/01_axi4-uifdma_ip/uifdma/project_1.xpr
+update_compile_order -fileset sources_1
+set_property part xc7z035ffg900-2 [current_project]

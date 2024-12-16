@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Thu Nov  2 10:04:22 2023
+# Process ID: 11072
+# Current directory: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5976 E:\MLK_hardware\F9\100T\3_1_02\01_axi4-uifdma_ip\uifdma\project_1.xpr
+# Log file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/vivado.log
+# Journal file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/project_1.xpr
+update_compile_order -fileset sources_1

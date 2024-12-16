@@ -1,0 +1,18 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Fri Nov 24 09:03:25 2023
+# Process ID: 9836
+# Current directory: F:/work/F9/35T/3_1_02_ex_plddr_axi_fdma_703-35T/01_axi4-uifdma_ip/uifdma
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent13732 F:\work\F9\35T\3_1_02_ex_plddr_axi_fdma_703-35T\01_axi4-uifdma_ip\uifdma\project_1.xpr
+# Log file: F:/work/F9/35T/3_1_02_ex_plddr_axi_fdma_703-35T/01_axi4-uifdma_ip/uifdma/vivado.log
+# Journal file: F:/work/F9/35T/3_1_02_ex_plddr_axi_fdma_703-35T/01_axi4-uifdma_ip/uifdma\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project F:/work/F9/35T/3_1_02_ex_plddr_axi_fdma_703-35T/01_axi4-uifdma_ip/uifdma/project_1.xpr
+update_compile_order -fileset sources_1
+set_property part xc7a35tfgg484-2 [current_project]
+reset_run synth_1
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1

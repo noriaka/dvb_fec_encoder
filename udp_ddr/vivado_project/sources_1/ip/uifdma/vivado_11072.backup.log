@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Thu Nov  2 10:04:22 2023
+# Process ID: 11072
+# Current directory: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5976 E:\MLK_hardware\F9\100T\3_1_02\01_axi4-uifdma_ip\uifdma\project_1.xpr
+# Log file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/vivado.log
+# Journal file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/project_1.xpr
+WARNING: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/project_1.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2021.1/data/ip'.
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Nov  2 10:06:16 2023...

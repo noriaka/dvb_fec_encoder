@@ -1,0 +1,138 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Wed Nov  1 19:30:12 2023
+# Process ID: 18284
+# Current directory: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9688 E:\MLK_hardware\F9\100T\3_1_02\01_axi4-uifdma_ip\uifdma\project_1.xpr
+# Log file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/vivado.log
+# Journal file: E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/project_1.xpr
+WARNING: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/project_1.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2021.1/data/ip'.
+update_compile_order -fileset sources_1
+ipx::package_project -root_dir e:/mlk_hardware/f9/100t/3_1_02/01_axi4-uifdma_ip/uifdma -vendor xilinx.com -library user -taxonomy /UserIP -force
+WARNING: [IP_Flow 19-587] [HDL Parser] HDL port or parameter 'axi_wburst_size' has a dependency on the module local parameter or undefined parameter 'AXI_BYTES'.
+WARNING: [IP_Flow 19-587] [HDL Parser] HDL port or parameter 'axi_rburst_size' has a dependency on the module local parameter or undefined parameter 'AXI_BYTES'.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_wbusy on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_wvalid on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_rbusy on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_rdata on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_rvalid on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5462] Defaulting to slave bus interface due to conflicts in bus interface inference.
+INFO: [IP_Flow 19-5107] Inferred bus interface 'I' of definition 'xilinx.com:user:FDMA:1.0' (from User Repositories).
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_waddr on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_wareq on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_wsize on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_wdata on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_wready on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_raddr on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_rareq on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_rsize on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5463] No port map found for required logical port fdma_rready on bus interface abstraction FDMA_rtl for interface type master.
+WARNING: [IP_Flow 19-5462] Defaulting to slave bus interface due to conflicts in bus interface inference.
+INFO: [IP_Flow 19-5107] Inferred bus interface 'O' of definition 'xilinx.com:user:FDMA:1.0' (from User Repositories).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'M_AXI' of definition 'xilinx.com:interface:aximm:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'M_AXI_ARESETN' of definition 'xilinx.com:signal:reset:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-5107] Inferred bus interface 'M_AXI_ACLK' of definition 'xilinx.com:signal:clock:1.0' (from Xilinx Repository).
+INFO: [IP_Flow 19-4728] Bus Interface 'M_AXI_ARESETN': Added interface parameter 'POLARITY' with value 'ACTIVE_LOW'.
+INFO: [IP_Flow 19-4728] Bus Interface 'M_AXI_ACLK': Added interface parameter 'ASSOCIATED_BUSIF' with value 'M_AXI'.
+INFO: [IP_Flow 19-4728] Bus Interface 'M_AXI_ACLK': Added interface parameter 'ASSOCIATED_RESET' with value 'M_AXI_ARESETN'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_waddr' and definition port 'fdma_waddr'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_wareq' and definition port 'fdma_wareq'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_wsize' and definition port 'fdma_wsize'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_wdata' and definition port 'fdma_wdata'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_wready' and definition port 'fdma_wready'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_raddr' and definition port 'fdma_raddr'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_rareq' and definition port 'fdma_rareq'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_rsize' and definition port 'fdma_rsize'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'I_fdma_rready' and definition port 'fdma_rready'.
+WARNING: [IP_Flow 19-1965] Bus Interface 'I': A port map to the required logical port "fdma_wbusy" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'I': A port map to the required logical port "fdma_wvalid" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'I': A port map to the required logical port "fdma_rbusy" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'I': A port map to the required logical port "fdma_rdata" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'I': A port map to the required logical port "fdma_rvalid" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'O_fdma_wbusy' and definition port 'fdma_wbusy'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'O_fdma_wvalid' and definition port 'fdma_wvalid'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'O_fdma_rbusy' and definition port 'fdma_rbusy'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'O_fdma_rdata' and definition port 'fdma_rdata'.
+WARNING: [IP_Flow 19-3480] slave: Portmap direction mismatched between component port 'O_fdma_rvalid' and definition port 'fdma_rvalid'.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_waddr" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_wareq" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_wsize" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_wdata" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_wready" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_raddr" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_rareq" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_rsize" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+WARNING: [IP_Flow 19-1965] Bus Interface 'O': A port map to the required logical port "fdma_rready" of the bus abstraction "xilinx.com:user:FDMA_rtl:1.0" is missing.
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+set_property display_name uiFDMA_v3_0 [ipx::current_core]
+set_property description uiFDMA_v3_0 [ipx::current_core]
+set_property display_name uiFDMA_v3_2 [ipx::current_core]
+set_property description uiFDMA_v3_2 [ipx::current_core]
+set_property version 3.2 [ipx::current_core]
+ipx::remove_bus_interface I [ipx::current_core]
+ipx::remove_bus_interface O [ipx::current_core]
+ipx::create_abstraction_definition xilinx.com user FDMA_rtl 3.2
+ipx::create_bus_definition xilinx.com user FDMA 3.2
+set_property xml_file_name E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA_rtl.xml [ipx::current_busabs]
+set_property xml_file_name E:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA.xml [ipx::current_busdef]
+set_property bus_type_vlnv xilinx.com:user:FDMA:3.2 [ipx::current_busabs]
+ipx::save_abstraction_definition [ipx::current_busabs]
+ipx::save_bus_definition [ipx::current_busdef]
+ipx::add_bus_abstraction_port I_fdma_waddr [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wareq [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_wbusy [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wsize [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_wvalid [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wdata [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_wready [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_raddr [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_rareq [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_rsize [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_rbusy [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_rdata [ipx::current_busabs]
+ipx::add_bus_abstraction_port O_fdma_rvalid [ipx::current_busabs]
+ipx::add_bus_abstraction_port I_fdma_rready [ipx::current_busabs]
+ipx::save_bus_definition [ipx::current_busdef]
+ipx::save_abstraction_definition [ipx::current_busabs]
+update_ip_catalog -rebuild
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma'.
+update_ip_catalog -rebuild -repo_path e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+INFO: [IP_Flow 19-725] Reloaded user IP repository 'e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma'
+ipx::infer_bus_interface {I_fdma_waddr I_fdma_wareq O_fdma_wbusy I_fdma_wsize O_fdma_wvalid I_fdma_wdata I_fdma_wready I_fdma_raddr I_fdma_rareq I_fdma_rsize O_fdma_rbusy O_fdma_rdata O_fdma_rvalid I_fdma_rready} xilinx.com:user:FDMA:3.2 [ipx::current_core]
+INFO: [IP_Flow 19-5107] Inferred bus interface 'FDMA_1' of definition 'xilinx.com:user:FDMA:3.2' (from TCL Argument).
+set_property name FDMA_S [ipx::get_bus_interfaces FDMA_1 -of_objects [ipx::current_core]]
+ipx::unload_abstraction_definition e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA_rtl.xml
+ipx::unload_bus_definition e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma/FDMA.xml
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::save_core [ipx::current_core]
+set_property core_revision 2 [ipx::current_core]
+ipx::create_xgui_files [ipx::current_core]
+ipx::update_checksums [ipx::current_core]
+ipx::check_integrity [ipx::current_core]
+INFO: [IP_Flow 19-2181] Payment Required is not set for this core.
+INFO: [IP_Flow 19-2187] The Product Guide file is missing.
+INFO: [Ipptcl 7-1486] check_integrity: Integrity check passed.
+ipx::save_core [ipx::current_core]
+update_ip_catalog -rebuild -repo_path e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma
+INFO: [IP_Flow 19-725] Reloaded user IP repository 'e:/MLK_hardware/F9/100T/3_1_02/01_axi4-uifdma_ip/uifdma'
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Nov  1 19:37:13 2023...
