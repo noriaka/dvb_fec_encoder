@@ -60,50 +60,151 @@
 
 // endmodule
 //-----------------------------------------------------------------
-module custom_ram #( parameter ADDR_WIDTH = 7,
-                parameter DATA_WIDTH = 360,
-                parameter DEPTH = 108)
-                (
-                input  clk,
-                //input  rst_n,
-                //read port
-                input  re1,
-                input  [ADDR_WIDTH-1:0] rd_addr1,
-                output reg [DATA_WIDTH-1:0] rd_data1,
-                //read port
-                input                            re2,
-                input  [ADDR_WIDTH-1:0]     rd_addr2,
-                output reg [DATA_WIDTH-1:0] rd_data2,
+// module custom_ram #( 
+//     parameter ADDR_WIDTH = 7,
+//     parameter DATA_WIDTH = 360,
+//     parameter DEPTH = 108
+// )(
+//     input  clk,
+//     //input  rst_n,
+//     //read port
+//     input                       re1,
+//     input  [ADDR_WIDTH-1:0]     rd_addr1,
+//     output reg [DATA_WIDTH-1:0] rd_data1,
 
-                //write port
-                input  we,
-                input  [ADDR_WIDTH-1:0] wr_addr,
-                input  [DATA_WIDTH-1:0] wr_data
-                );
+//     input                       re2,
+//     input  [ADDR_WIDTH-1:0]     rd_addr2,
+//     output reg [DATA_WIDTH-1:0] rd_data2,
 
-    (*ram_style="block"*)reg [DATA_WIDTH-1:0] bram [0:DEPTH-1];
-    //read1
-    always @(posedge clk)
-    begin
-        if(re1)
-            rd_data1 <= bram[rd_addr1];
-        else
-            rd_data1 <= rd_data1;
+//     //write port
+//     input                       we1,
+//     input  [ADDR_WIDTH-1:0]     wr_addr1,
+//     input  [DATA_WIDTH-1:0]     wr_data1
+
+//     // input                       we2,
+//     // input  [ADDR_WIDTH-1:0]     wr_addr2,
+//     // input  [DATA_WIDTH-1:0]     wr_data2
+// );
+
+//     reg [DATA_WIDTH-1:0] bram [0:DEPTH-1];
+//     //read1
+//     always @(posedge clk)
+//     begin
+//         if(re1)
+//             rd_data1 <= bram[rd_addr1];
+//         else
+//             rd_data1 <= rd_data1;
+//     end
+//     //read2
+//     always @(posedge clk)
+//     begin
+//         if(re2)
+//             rd_data2 <= bram[rd_addr2];
+//         else
+//             rd_data2 <= rd_data2;
+//     end
+
+
+//     //write1
+//     always @(posedge clk)
+//     begin
+//         if(we1)
+//             bram[wr_addr1]<=wr_data1;
+//     end
+//     //write2
+//     // always @(posedge clk)
+//     // begin
+//     //     if(we2)
+//     //         bram[wr_addr2]<=wr_data2;
+//     // end
+// endmodule
+
+module custom_ram #(
+    parameter ADDR_WIDTH = 7,
+    parameter DATA_WIDTH = 360,
+    parameter DEPTH = 128
+)(
+    input                       clk,
+    
+    // 写端口 0
+    input                       we0,
+    input  [ADDR_WIDTH-1:0]     wr_addr0,
+    input  [DATA_WIDTH-1:0]     wr_data0,
+    
+    // 写端口 1
+    input                       we1,
+    input  [ADDR_WIDTH-1:0]     wr_addr1,
+    input  [DATA_WIDTH-1:0]     wr_data1,
+    
+    // ram0 读
+    input                       re0,
+    input  [ADDR_WIDTH-1:0]     rd_addr0,
+    output reg [DATA_WIDTH-1:0] rd_data0,
+    input                       re1,
+    input  [ADDR_WIDTH-1:0]     rd_addr1,
+    output reg [DATA_WIDTH-1:0] rd_data1,
+
+    // ram1读
+    input                       re2,
+    input  [ADDR_WIDTH-1:0]     rd_addr2,
+    output reg [DATA_WIDTH-1:0] rd_data2,
+    input                       re3,
+    input  [ADDR_WIDTH-1:0]     rd_addr3,
+    output reg [DATA_WIDTH-1:0] rd_data3,
+    input                       re4,
+    input  [ADDR_WIDTH-1:0]     rd_addr4,
+    output reg [DATA_WIDTH-1:0] rd_data4,
+    input                       re5,
+    input  [ADDR_WIDTH-1:0]     rd_addr5,
+    output reg [DATA_WIDTH-1:0] rd_data5
+);
+
+    (* ram_style = "block" *) reg [DATA_WIDTH-1:0] ram0 [0:DEPTH-1];
+    (* ram_style = "block" *) reg [DATA_WIDTH-1:0] ram1 [0:DEPTH-1];
+
+    always @(posedge clk) begin
+        if (we0) begin
+            ram0[wr_addr0] <= wr_data0;
+        end
     end
-    //read2
-    always @(posedge clk)
-    begin
-        if(re2)
-            rd_data2 <= bram[rd_addr2];
-        else
-            rd_data2 <= rd_data2;
+
+    always @(posedge clk) begin
+        if (we1) begin
+            ram1[wr_addr1] <= wr_data1;
+        end
+    end
+
+    always @(posedge clk) begin
+        if (re0) begin
+            rd_data0 <= ram0[rd_addr0];
+        end
+    end
+    always @(posedge clk) begin
+        if (re1) begin
+            rd_data1 <= ram0[rd_addr1];
+        end
+    end
+
+    always @(posedge clk) begin
+        if (re2) begin
+            rd_data2 <= ram1[rd_addr2];
+        end
+    end
+    always @(posedge clk) begin
+        if (re3) begin
+            rd_data3 <= ram1[rd_addr3];
+        end
+    end
+    always @(posedge clk) begin
+        if (re4) begin
+            rd_data4 <= ram1[rd_addr4];
+        end
+    end
+    always @(posedge clk) begin
+        if (re5) begin
+            rd_data5 <= ram1[rd_addr5];
+        end
     end
 
 
-    //write
-    always @(posedge clk)
-    begin
-        if(we)
-            bram[wr_addr]<=wr_data;
-    end
 endmodule

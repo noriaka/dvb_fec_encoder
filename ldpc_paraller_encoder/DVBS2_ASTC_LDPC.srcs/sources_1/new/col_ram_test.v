@@ -51,28 +51,48 @@ module col_ram_test(
 //     .wr_data        (wr_data)
 // );
 
-reg we;
-reg re1, re2, re3, re4, re5, re6, re7, re8, re9, re10, re11;
-reg [7:0] wr_addr, rd_addr1, rd_addr2, rd_addr3, rd_addr4,
-            rd_addr5, rd_addr6, rd_addr7, rd_addr8, rd_addr9, 
-            rd_addr10, rd_addr11;
-reg [359:0] wr_data;
-wire [359:0] rd_data1, rd_data2, rd_data3, rd_data4, 
-            rd_data5, rd_data6, rd_data7, rd_data8, 
-            rd_data9, rd_data10, rd_data11;
+reg we0, we1;
+reg re0, re1, re2, re3, re4, re5;
+reg [7:0] wr_addr0, wr_addr1, rd_addr0, rd_addr1, rd_addr2, rd_addr3, rd_addr4, rd_addr5;
+reg [359:0] wr_data0, wr_data1;
+wire [359:0] rd_data0, rd_data1, rd_data2, rd_data3, rd_data4, rd_data5;
 
 (* keep_hierarchy="yes" *)
 custom_ram custom_ram_inst (
-    .clk(clk),
-    .we(we),
-    .wr_addr(wr_addr),
-    .wr_data(wr_data),
-    .re1(re1),
-    .rd_addr1(rd_addr1),
-    .rd_data1(rd_data1),
-    .re2(re2),
-    .rd_addr2(rd_addr2),
-    .rd_data2(rd_data2)
+    .clk                        (clk),
+    .we0                        (we0),
+    .wr_addr0                   (wr_addr0),
+    .wr_data0                   (wr_data0),
+    .we1                        (we1),
+    .wr_addr1                   (wr_addr1),
+    .wr_data1                   (wr_data1),
+    .re0                        (re0),
+    .rd_addr0                   (rd_addr0),
+    .rd_data0                   (rd_data0),
+    .re1                        (re1),
+    .rd_addr1                   (rd_addr1),
+    .rd_data1                   (rd_data1),
+    .re2                        (re2),
+    .rd_addr2                   (rd_addr2),
+    .rd_data2                   (rd_data2),
+    .re3                        (re3),
+    .rd_addr3                   (rd_addr3),
+    .rd_data3                   (rd_data3)
 );
+// custom_ram custom_ram_inst (
+//     .clk                    (clk),
+//     .re1                    (re1),
+//     .rd_addr1               (rd_addr1),
+//     .rd_data1               (rd_data1),
+//     .re2                    (re2),
+//     .rd_addr2               (rd_addr2),
+//     .rd_data2               (rd_data2),
+//     .we1                    (we1),
+//     .wr_addr1               (wr_addr1),
+//     .wr_data1               (wr_data1)
+//     // .we2                    (we2),
+//     // .wr_addr2               (wr_addr2),
+//     // .wr_data2               (wr_data2)
+// );
 
 endmodule
